@@ -3,4 +3,5 @@
  *
  */
 
-module.exports = require(`./sources`)
+module.exports.encrypt = require(`./sources/encrypt`)
+module.exports.decrypt = require(`./sources/decrypt`)
