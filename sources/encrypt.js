@@ -15,6 +15,14 @@ module.exports = (message, options) => {
 	 *
 	 */
 
+	if (!message) {
+		return message
+	}
+
+	/**
+	 *
+	 */
+
 	if (message.constructor === Object) {
 		message = JSON.stringify(message)
 	}
