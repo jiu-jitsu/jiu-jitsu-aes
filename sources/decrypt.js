@@ -47,6 +47,16 @@ module.exports = (message, options) => {
 	 *
 	 */
 
-	return `${cipher.update(message.substr(16), `base64`, `utf8`)}${cipher.final(`utf8`)}`
+	const decoded = `${cipher.update(message.substr(16), `base64`, `utf8`)}${cipher.final(`utf8`)}`
+
+	/**
+	 *
+	 */
+
+	try {
+		return JSON.parse(decoded)
+	} catch (cause) {
+		return decoded
+	}
 
 }
