@@ -3,13 +3,13 @@
  *
  */
 
-const crypto = require(`crypto`)
+const crypto = require("crypto")
 
 /**
  *
  */
 
-module.exports = (message, options) => {
+module.exports = async (message, options) => {
 
 	/**
 	 *
@@ -40,14 +40,14 @@ module.exports = (message, options) => {
 	 */
 
 	const key = options.key
-	const iv = Buffer.from(message.substr(0, 16), `base64`)
-	const cipher = crypto.createDecipheriv(`aes256`, key, iv)
+	const iv = Buffer.from(message.substr(0, 16), "base64")
+	const cipher = crypto.createDecipheriv("aes256", key, iv)
 
 	/**
 	 *
 	 */
 
-	const decoded = `${cipher.update(message.substr(16), `base64`, `utf8`)}${cipher.final(`utf8`)}`
+	const decoded = `${cipher.update(message.substr(16), "base64", "utf8")}${cipher.final("utf8")}`
 
 	/**
 	 *
