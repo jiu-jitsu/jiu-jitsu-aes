@@ -3,5 +3,14 @@
  *
  */
 
-module.exports.encrypt = require("./sources/encrypt")
-module.exports.decrypt = require("./sources/decrypt")
+const encrypt = require("./sources/encrypt")
+const decrypt = require("./sources/decrypt")
+
+/**
+ *
+ */
+
+module.exports = {
+	encrypt,
+	decrypt
+}

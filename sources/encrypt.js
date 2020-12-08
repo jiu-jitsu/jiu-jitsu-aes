@@ -9,37 +9,36 @@ const crypto = require("crypto")
  *
  */
 
-module.exports = async (message, options) => {
+module.exports = async (value, key) => {
 
 	/**
 	 *
 	 */
 
-	if (!message) {
-		return message
+	if (!value) {
+		return value
 	}
 
 	/**
 	 *
 	 */
 
-	if (message.constructor === Object) {
-		message = JSON.stringify(message)
+	if (value.constructor === Object) {
+		value = JSON.stringify(value)
 	}
 
 	/**
 	 *
 	 */
 
-	if (message.constructor === Array) {
-		message = JSON.stringify(message)
+	if (value.constructor === Array) {
+		value = JSON.stringify(value)
 	}
 
 	/**
 	 *
 	 */
 
-	const key = options.key
 	const iv = crypto.randomBytes(16)
 	const cipher = crypto.createCipheriv("aes256", key, iv)
 
@@ -47,6 +46,6 @@ module.exports = async (message, options) => {
 	 *
 	 */
 
-	return `${iv.toString("base64")}${cipher.update(message, "utf8", "base64")}${cipher.final("base64")}`
+	return `${iv.toString("base64")}${cipher.update(value, "utf8", "base64")}${cipher.final("base64")}`
 
 }

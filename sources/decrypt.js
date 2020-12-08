@@ -9,45 +9,44 @@ const crypto = require("crypto")
  *
  */
 
-module.exports = async (message, options) => {
+module.exports = async (value, key) => {
 
 	/**
 	 *
 	 */
 
-	if (!message) {
-		return message
+	if (!value) {
+		return value
 	}
 
 	/**
 	 *
 	 */
 
-	if (message.constructor === Object) {
-		return message
+	if (value.constructor === Object) {
+		return value
 	}
 
 	/**
 	 *
 	 */
 
-	if (message.constructor === Array) {
-		return message
+	if (value.constructor === Array) {
+		return value
 	}
 
 	/**
 	 *
 	 */
 
-	const key = options.key
-	const iv = Buffer.from(message.substr(0, 16), "base64")
+	const iv = Buffer.from(value.substr(0, 16), "base64")
 	const cipher = crypto.createDecipheriv("aes256", key, iv)
 
 	/**
 	 *
 	 */
 
-	const decoded = `${cipher.update(message.substr(16), "base64", "utf8")}${cipher.final("utf8")}`
+	const decoded = `${cipher.update(value.substr(16), "base64", "utf8")}${cipher.final("utf8")}`
 
 	/**
 	 *
